@@ -32,7 +32,7 @@ glue_iam_role = "Camore_Glue_Job_Role"
 region_name = "ap-northeast-2"
 
                 ### slack api specific variables
-alert = SlackAlert('#백엔드개발팀_데이터프로젝트_알림') # 메세지를 보낼 슬랙 채널명을 파라미터로 넣어줍니다.
+alert = SlackAlert('#message') # 메세지를 보낼 슬랙 채널명을 파라미터로 넣어줍니다.
 
 
 default_args = {
@@ -86,10 +86,10 @@ with DAG(dag_id="Aurora_MySQLDB_Data_PipeLine_Daily", default_args=default_args)
     dag=dag)
 
 
-    company_integration_table = "bi_company_integration"
-    user_information_table = "bi_user_information"
-    reservation_information_table = "bi_reservation_information"
-    domestic_settlement_table = "bi_domestic_settlement"
+    company_integration_table = "*********"
+    user_information_table = "*********"
+    reservation_information_table = "*********"
+    domestic_settlement_table = "*********"
 
 
     with TaskGroup(group_id = "Create_Table_Query_Group") as CreateTableQuery:
@@ -104,21 +104,21 @@ with DAG(dag_id="Aurora_MySQLDB_Data_PipeLine_Daily", default_args=default_args)
             task_id='user_information_Athena_Query_Create_Table',
             query=f"""{create_table_query(user_information_table)}{user_information_query}""",
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         reservation_information_Create_Table_query = AthenaOperator(
             task_id='reservation_information_Athena_Query_Create_Table',
             query=f"""{create_table_query(reservation_information_table)}{reservation_information_query}""",
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         domestic_settlement_Create_Table_query = AthenaOperator(
             task_id='domestic_settlement_Athena_Query_Create_Table',
             query=f"""{create_table_query(domestic_settlement_table)}{domestic_settlement_query}""",
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
 
@@ -128,28 +128,28 @@ with DAG(dag_id="Aurora_MySQLDB_Data_PipeLine_Daily", default_args=default_args)
             task_id='company_integration_Athena_Query_Insert',
             query=f"""INSERT INTO carmore.bi_company_integration {company_integration_query}""",
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         user_information_Insert_query = AthenaOperator(
             task_id='user_information_Athena_Query_Insert',
             query=f"""INSERT INTO carmore.bi_user_information {user_information_query}""",
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         reservation_information_Insert_query = AthenaOperator(
             task_id='reservation_information_Athena_Query_Insert',
             query=f"""INSERT INTO carmore.bi_reservation_information {reservation_information_query}""",
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         domestic_settlement_Insert_query = AthenaOperator(
             task_id='domestic_settlement_Athena_Query_Insert',
             query=f"""INSERT INTO carmore.bi_domestic_settlement {domestic_settlement_query}""",
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
 
@@ -159,28 +159,28 @@ with DAG(dag_id="Aurora_MySQLDB_Data_PipeLine_Daily", default_args=default_args)
             task_id='company_integration_Athena_Query_Delete',
             query='DELETE FROM carmore.bi_company_integration',
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         user_information_Delete_query = AthenaOperator(
             task_id='user_information_Athena_Query_Delete',
             query='DELETE FROM carmore.bi_user_information',
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         reservation_information_Delete_query = AthenaOperator(
             task_id='reservation_information_Athena_Query_Delete',
             query='DELETE FROM carmore.bi_reservation_information',
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
         domestic_settlement_Delete_query = AthenaOperator(
             task_id='domestic_settlement_Athena_Query_Delete',
             query='DELETE FROM carmore.bi_domestic_settlement',
             output_location='s3://dataproject-bucket/mwaaLog/athena_output/',
-            database='carmore'
+            database='*********'
         )
 
     carmore_all_schema_extracting_job >> carmore_delta_table >> CreateTableQuery >> DeleteQuery >> InsertQuery
