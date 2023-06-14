@@ -96,8 +96,8 @@ def directJDBCSource(
 conf = (SparkConf()\
     .set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")\
     .set("spark.sql.catalog.glue_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-    .set("spark.sql.catalog.glue_catalog.warehouse", "s3://dataproject-bucket/data/carmore/")
-    .set("hive.metastore.warehouse.dir", "s3://dataproject-bucket/data/carmore/")
+    .set("spark.sql.catalog.glue_catalog.warehouse", "s3://dataproject-bucket/data/****/")
+    .set("hive.metastore.warehouse.dir", "s3://dataproject-bucket/data/****/")
     .set("spark.databricks.hive.metastore.glueCatalog.enabled", "true")
     .set("spark.sql.debug.maxToStringFields", "10000")
 
@@ -112,8 +112,8 @@ job = Job(glueContext)
 job.init(args["JOB_NAME"], args)
 
      
-path1 = "s3://dataproject-bucket/table/carmore_all_table_final_big_size.csv" ## 테이블 schema, 테이블 명 담겨있는 csv파일
-path2 = "s3://dataproject-bucket/table/carmore_all_table_final_small_size.csv"
+path1 = "s3://dataproject-bucket/table/****_all_table_final_big_size.csv" ## 테이블 schema, 테이블 명 담겨있는 csv파일
+path2 = "s3://dataproject-bucket/table/****_all_table_final_small_size.csv"
 tableN = spark.read.option("header", "true").option("inferSchema", "true").csv(path1)
 db_tables=tableN.select("database","table", "key").collect()
 
