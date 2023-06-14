@@ -92,8 +92,8 @@ def directJDBCSource(
 conf = (SparkConf()\
     .set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")\
     .set("spark.sql.catalog.glue_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-    .set("spark.sql.catalog.glue_catalog.warehouse", "s3://dataproject-bucket/data/carmore/")
-    .set("hive.metastore.warehouse.dir", "s3://dataproject-bucket/data/carmore/")
+    .set("spark.sql.catalog.glue_catalog.warehouse", "s3://dataproject-bucket/data/*******/")
+    .set("hive.metastore.warehouse.dir", "s3://dataproject-bucket/data/*****/")
     .set("spark.databricks.hive.metastore.glueCatalog.enabled", "true")
     )
 
@@ -111,7 +111,7 @@ tableN = spark.read.option("header", "true").option("inferSchema", "true").csv(p
 db_tables=tableN.select("database","table").collect()
 
 ## 테이블 스키마 담겨있는 csv 파일 
-allSchemaDf = spark.read.option("header","true").option("inferschema", "true").csv("s3://dataproject-bucket/data/caremore_allSchema/*.csv") 
+allSchemaDf = spark.read.option("header","true").option("inferschema", "true").csv("s3://dataproject-bucket/data/********/*.csv") 
 
  
 database_name = 'carmore'
