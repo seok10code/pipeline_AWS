@@ -17,7 +17,7 @@ args = getResolvedOptions(sys.argv, ['JOB_NAME','raw_s3_path','catalog','iceberg
 # raw_s3_path : s3://icebergglueblog-raws3bucket-winby5ygqhi3/full-load
 # catalog : glue_catalog
 # iceberg_s3_path : s3://icebergglueblog-curateds3bucket-140bn8buyn1gn
-# database : human_resources
+# database : ********
 # table_name : employee_details
 # primary_key : emp_no
 # partition_key : department
