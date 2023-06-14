@@ -58,8 +58,8 @@ def directJDBCSource(
 conf = (SparkConf()\
     .set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")\
     .set("spark.sql.catalog.glue_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-    .set("spark.sql.catalog.glue_catalog.warehouse", "s3://dataproject-bucket/data/carmore/")
-    .set("hive.metastore.warehouse.dir", "s3://dataproject-bucket/data/carmore/")
+    .set("spark.sql.catalog.glue_catalog.warehouse", "s3://dataproject-bucket/data/******/")
+    .set("hive.metastore.warehouse.dir", "s3://dataproject-bucket/data/*******/")
     .set("spark.databricks.hive.metastore.glueCatalog.enabled", "true")
     )
 
