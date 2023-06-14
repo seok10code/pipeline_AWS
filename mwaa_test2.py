@@ -14,12 +14,12 @@ from datetime import datetime, timedelta
 ### glue job specific variables
 # glue_job_name = "teamo2Job"
 glue_iam_role = "AWSGlueServiceRole"
-region_name = "ap-northeast-2"
-email_recipient = "swkim@cloocus.com"
+region_name = "ap-******-2"
+email_recipient = "***@cloocus.com"
 
 
 default_args = {
-    'owner': 'admin',
+    'owner': '*****',
     'retry_delay': timedelta(minutes=3),
 }
 
@@ -38,8 +38,8 @@ dag = DAG(
 
 glue_task1 = GlueJobOperator(  
     task_id="glue_task1",  
-    job_name="teamo2Job1",
-    script_location = "s3://airflow-cloocus-test-bucket/scripts/teamo2Job1.py",
+    job_name="******",
+    script_location = "s3://airflow-cloocus-test-bucket/scripts/******.py",
     concurrent_run_limit=4,
     region_name = region_name,
     s3_bucket = "s3://cloocus-test-bucket/mwaaLog/",
@@ -52,18 +52,18 @@ glue_task1 = GlueJobOperator(
     
 glue_task2 = GlueJobOperator(  
     task_id="glue_task2",  
-    job_name="teamo2Job2",
-    script_location = "s3://airflow-cloocus-test-bucket/scripts/teamo2Job2.py",
+    job_name="*****2Job2",
+    script_location = "s3://airflow-*****-test-bucket/scripts/******.py",
     region_name = region_name,
     concurrent_run_limit=4,
-    s3_bucket = "s3://cloocus-test-bucket/mwaaLog/",
+    s3_bucket = "s3://*****-test-bucket/mwaaLog/",
     create_job_kwargs={"GlueVersion": "3.0", "NumberOfWorkers": 10, "WorkerType": "G.1X"}, 
     iam_role_name='AWSGlueServiceRoleDefault',  
     dag=dag)
 
 glue_task3 = GlueJobOperator(  
     task_id="glue_task3",  
-    job_name="teamo2Job3",
+    job_name="****2Job3",
     concurrent_run_limit=4,
     script_location = "s3://airflow-cloocus-test-bucket/scripts/teamo2Job3.py",
     region_name = region_name,
