@@ -122,9 +122,9 @@ for dbtb in db_tables:
     jdbcDF = (spark.read \
       .format("jdbc")
       .option("driver","com.mysql.cj.jdbc.Driver")
-      .option("url", "jdbc:mysql://carmore-prod-cluster.cluster-ro-c0dbvvfuggmr.ap-northeast-2.rds.amazonaws.com:3306/carmore")
-      .option("user", "carmoreAdmin")
-      .option("password", "2t0e1a8mo2db!")
+      .option("url", "jdbc:mysql://*********-*********-cluster.*********-ro-*********.ap-*********-2.rds.*********.com:3306/*********")
+      .option("user", "*********")
+      .option("password", "*********!")
       .option('batchsize', 5000)
       .option("query", que)
       .option("fetchsize", 1000)
