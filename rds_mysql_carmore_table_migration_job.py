@@ -153,7 +153,7 @@ for dbtb in db_tables:
         spark.sql(f"CREATE DATABASE IF NOT EXISTS {database_name}")
         result_schem = getSchem(jdbcDF)
         spark.sql(f"DROP TABLE IF EXISTS {database_name}.{table_name}")
-        deltaTable = DeltaTable.forPath(spark, f"s3://dataproject-bucket/data/{database_name}_aurora/{table_name}/")
+        deltaTable = DeltaTable.forPath(spark, f"s3://dataproject-bucket/data/{database_name}*********/{table_name}/")
         deltaTable.generate("symlink_format_manifest")
         ## Glue Catalog 저장 
         spark.sql(f"""
@@ -161,7 +161,7 @@ for dbtb in db_tables:
          ROW FORMAT SERDE "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe" 
          STORED AS INPUTFORMAT "org.apache.hadoop.hive.ql.io.SymlinkTextInputFormat" 
          OUTPUTFORMAT "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat" 
-         LOCATION "s3://dataproject-bucket/data/{database_name}_aurora/{table_name}/_symlink_format_manifest/"
+         LOCATION "s3://dataproject-bucket/data/{database_name}*********/{table_name}/_symlink_format_manifest/"
         """)
     except Exception as error:
         # handle the exception
